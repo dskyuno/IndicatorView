@@ -143,6 +143,10 @@ public class IndicatorView extends View {
         a.recycle();
     }
 
+    public void setmIndicatorSelectedIndex(int mIndicatorSelectedIndex) {
+        this.mIndicatorSelectedIndex = mIndicatorSelectedIndex;
+    }
+
     private void init(){
 
         if(mIndicatorTextSize == 0)
