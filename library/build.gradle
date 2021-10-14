@@ -1,13 +1,15 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+/*apply plugin: 'com.novoda.bintray-release'*/
+apply plugin: 'maven-publish'
+
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 31
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 23
+        minSdkVersion 29
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -22,14 +24,75 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:23.4.0'
 }
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
 
-publish {
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.yuno'
+                artifactId = 'indicator'
+                version = '1.0.0'
+            }
+
+        }
+    }
+}
+
+/*publish {
     userOrg = 'carbs'
     groupId = 'cn.carbs.android'
     artifactId = 'IndicatorView'
     publishVersion = '1.0.2'
     desc = ''
     website = 'https://github.com/Carbs0126/IndicatorView'
+}*/
+
+/*
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.my.group'
+                artifactId = 'id'
+                version = '5.1.0'
+            }
+        }
+    }
+}*/
+/*afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'mygroup'
+                artifactId = 'common'
+                version = '1.0.0'
+                //artifact(bundleReleaseAar)
+            }
+        }
+    }
+}*/
+
+/*
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.gradle.sample'
+            artifactId = 'project1-sample'
+            version = '1.1'
+
+            from components.release
+        }
+    }
 }
+*/
+
+
+
